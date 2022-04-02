@@ -78,16 +78,14 @@ def get_assignments(user: StudentVue):
 
 def get_weighted_assignments(user: StudentVue) -> list:
     courses = get_assignments(user)
-    weighted_assignments = []
 
-    for course in courses:
-        # grabbing 1st element because the 0th element is the course name and the second element is the assignments
-        course = course[1]
+    for index, course in enumerate(courses):
+        course = course['assignments']
         course_assignments = []
         for a in course:
-            if "formative" not in a["type"].lower() and 'not for grading' not in a['type'].lower():
+            if "formative" not in a["assignment_type"].lower() and 'not for grading' not in a['notes'].lower():
                 course_assignments.append(a)
+        # changing the assignments key for the specific course
+        courses[index]['assignments'] = course_assignments
 
-        weighted_assignments.append(course_assignments)
-
-    return weighted_assignments
+    return courses
