@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends
-from .core.assignments import get_assignments, get_weighted_assignments
+from api.core.assignments import get_assignments, get_weighted_assignments
 from studentvue import StudentVue
-from .user import get_user
-from . import schemas
+from api import schemas
 from typing import List
+from api import oauth2
 
 router = APIRouter(prefix='/assignments', tags=['Assignments'])
 
 
 @router.get('/', response_model=List[schemas.Assignments])
-def get_assignments_route(user: StudentVue = Depends(get_user), weighted: bool = False):
+def get_assignments_route(user: StudentVue = Depends(oauth2.get_current_user), weighted: bool = False):
     """
     Get <b>all</b> assignments for the user (weighted will only give the summative grades).
     """
@@ -18,7 +18,7 @@ def get_assignments_route(user: StudentVue = Depends(get_user), weighted: bool =
 
 
 @router.get("/{course_period}", response_model=List[schemas.Assignment])
-def course_assignments(course_period: int, user: StudentVue = Depends(get_user), weighted: bool = False):
+def course_assignments(course_period: int, user: StudentVue = Depends(oauth2.get_current_user), weighted: bool = False):
     """
     Get the assignments for a certain period.
     """

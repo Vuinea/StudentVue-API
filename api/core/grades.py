@@ -1,5 +1,5 @@
 from studentvue import StudentVue
-from app.utils import get_course_by_period
+from api.utils import get_course_by_period
 
 
 def get_raw_grades(user: StudentVue):

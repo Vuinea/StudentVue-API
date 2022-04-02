@@ -14,6 +14,7 @@ class Assignment(BaseModel):
     # due_date: datetime.datetime
     due_date: str
 
+
 class Assignments(BaseModel):
     course_name: str
     assignments: List[Assignment]
@@ -46,7 +47,6 @@ class FullCourse(BaseModel):
     letter_grade: str
     number_grade: int
     teacher: str
-    assignments: Optional[List[Assignment]]
     period: int
     room_name: str
 
@@ -56,3 +56,15 @@ class Event(BaseModel):
     date: str
     start_time: Optional[str]
     day_type: Optional[str]
+
+
+# auth
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str
+    password: str

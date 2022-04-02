@@ -38,3 +38,8 @@ def get_seven_days() -> list:
         day = today + datetime.timedelta(days=day_num)
         seven_days.append(day)
     return seven_days
+
+
+def verify(user: StudentVue):
+    error = "RT_ERROR" in user.get_gradebook().keys()
+    return not error

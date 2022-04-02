@@ -1,16 +1,16 @@
 from studentvue import StudentVue
-from app.utils import get_course_by_period
+from api.utils import get_course_by_period
 from .grades import get_raw_grades
 
 
 # this function will just return the ordered dict
-def get_full_courses(user: StudentVue) -> list:
+def get_raw_courses(user: StudentVue) -> list:
     return user.get_schedule()["StudentClassSchedule"]["ClassLists"]["ClassListing"]
 
 
 # this function will just return the course names
 def get_course_names(user: StudentVue) -> list:
-    courses = get_full_courses(user)
+    courses = get_raw_courses(user)
 
     return [course["@CourseTitle"] for course in courses]
 
@@ -24,7 +24,7 @@ def get_raw_today_courses(user: StudentVue) -> list:
 
 # I have to write this function because when you get the @ClassName it gives some weird numbers at the end
 def get_today_courses(user: StudentVue) -> list:
-    all_courses = get_full_courses(user)
+    all_courses = get_raw_courses(user)
     today_courses = get_raw_today_courses(user)
 
     today_course_names = []

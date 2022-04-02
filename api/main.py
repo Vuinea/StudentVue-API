@@ -1,8 +1,9 @@
 from fastapi import FastAPI
-from . import assignments, courses, grades, events
+from .routers import assignments, courses, grades, events, auth
 
 app = FastAPI()
 
+app.include_router(auth.router)
 app.include_router(courses.router)
 app.include_router(assignments.router)
 app.include_router(grades.router)

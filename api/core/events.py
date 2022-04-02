@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from studentvue import StudentVue
 import datetime
-from app.utils import get_seven_days
+from api.utils import get_seven_days
 
 
 def get_raw_events(user: StudentVue) -> dict:

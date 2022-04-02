@@ -1,15 +1,15 @@
 from fastapi import Depends, APIRouter
 from studentvue import StudentVue
-from .core.courses import get_courses, get_today_courses
-from .user import get_user
-from . import schemas
+from api.core.courses import get_courses, get_today_courses
+from api import schemas
 from typing import List
+from api import oauth2
 
 router = APIRouter(prefix="/courses", tags=['Courses'])
 
 
 @router.get('/', response_model=List[schemas.FullCourse])
-def get_courses_route(user: StudentVue = Depends(get_user)):
+def get_courses_route(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get all courses
     """
@@ -19,12 +19,11 @@ def get_courses_route(user: StudentVue = Depends(get_user)):
 
 
 @router.get('/today', response_model=List[schemas.ScheduleCourse])
-def get_today_assignments(user: StudentVue = Depends(get_user)):
+def get_today_assignments(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get courses for today
     """
     try:
         return get_today_courses(user)
-    except KeyError as e:
-        print(e)
+    except KeyError:
         return {"detail": "No school today"}

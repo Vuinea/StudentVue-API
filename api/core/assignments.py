@@ -1,5 +1,3 @@
-import datetime
-
 from studentvue import StudentVue
 from .courses import get_course_names
 
