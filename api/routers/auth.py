@@ -7,7 +7,7 @@ router = APIRouter(prefix='/auth', tags=['Authentication'])
 
 
 @router.post('/login', response_model=schemas.Token)
-def login(user_credentials: OAuth2PasswordRequestForm = Depends()):
+async def login(user_credentials: OAuth2PasswordRequestForm = Depends()):
     user = StudentVue(user_credentials.username, user_credentials.password, 'portal.lcps.org')
     username = user._username
     password = user._password

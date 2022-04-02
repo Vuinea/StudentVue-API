@@ -9,7 +9,7 @@ router = APIRouter(prefix='/assignments', tags=['Assignments'])
 
 
 @router.get('/', response_model=List[schemas.Assignments])
-def get_assignments_route(user: StudentVue = Depends(oauth2.get_current_user), weighted: bool = False):
+async def get_assignments_route(user: StudentVue = Depends(oauth2.get_current_user), weighted: bool = False):
     """
     Get <b>all</b> assignments for the user (weighted will only give the summative grades).
     """
@@ -18,7 +18,7 @@ def get_assignments_route(user: StudentVue = Depends(oauth2.get_current_user), w
 
 
 @router.get("/{course_period}", response_model=List[schemas.Assignment])
-def course_assignments(course_period: int, user: StudentVue = Depends(oauth2.get_current_user), weighted: bool = False):
+async def course_assignments(course_period: int, user: StudentVue = Depends(oauth2.get_current_user), weighted: bool = False):
     """
     Get the assignments for a certain period.
     """

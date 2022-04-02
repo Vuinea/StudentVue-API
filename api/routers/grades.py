@@ -8,7 +8,7 @@ router = APIRouter(prefix='/grades', tags=['Grades'])
 
 
 @router.get('/')
-def get_grades_route(user: StudentVue = Depends(oauth2.get_current_user)):
+async def get_grades_route(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get <b>all</b> grades
     """
@@ -16,7 +16,7 @@ def get_grades_route(user: StudentVue = Depends(oauth2.get_current_user)):
 
 
 @router.get('/{period_num}')
-def get_grade_by_period(period_num: int, user: StudentVue = Depends(oauth2.get_current_user)):
+async def get_grade_by_period(period_num: int, user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get grades for certain period
     """

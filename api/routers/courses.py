@@ -9,7 +9,7 @@ router = APIRouter(prefix="/courses", tags=['Courses'])
 
 
 @router.get('/', response_model=List[schemas.FullCourse])
-def get_courses_route(user: StudentVue = Depends(oauth2.get_current_user)):
+async def get_courses_route(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get all courses
     """
@@ -19,7 +19,7 @@ def get_courses_route(user: StudentVue = Depends(oauth2.get_current_user)):
 
 
 @router.get('/today', response_model=List[schemas.ScheduleCourse])
-def get_today_assignments(user: StudentVue = Depends(oauth2.get_current_user)):
+async def get_today_assignments(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get courses for today
     """

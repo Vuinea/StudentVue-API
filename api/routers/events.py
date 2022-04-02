@@ -11,7 +11,7 @@ router = APIRouter(prefix='/events', tags=['Events'])
 
 
 @router.get('/', response_model=List[schemas.Event])
-def get_all_events_route(user: StudentVue = Depends(oauth2.get_current_user)):
+async def get_all_events_route(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get <b>all</b> events
     """
@@ -19,7 +19,7 @@ def get_all_events_route(user: StudentVue = Depends(oauth2.get_current_user)):
 
 
 @router.get('/upcoming', response_model=List[schemas.Event])
-def get_upcoming_events_route(user: StudentVue = Depends(oauth2.get_current_user)):
+async def get_upcoming_events_route(user: StudentVue = Depends(oauth2.get_current_user)):
     """
     Get all events in the <b> next seven days</b>
     """
