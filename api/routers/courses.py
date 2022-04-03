@@ -26,4 +26,4 @@ async def get_today_assignments(user: StudentVue = Depends(oauth2.get_current_us
     try:
         return get_today_courses(user)
     except KeyError:
-        return {"detail": "No school today"}
+        return []
